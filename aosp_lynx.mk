@@ -22,12 +22,28 @@ BOARD_USES_SWIFTSHADER := true
 
 $(call inherit-product, device/google/gs201/aosp_common.mk)
 $(call inherit-product, device/google/lynx/device-lynx.mk)
+$(call inherit-product, device/google/lynx/device-aosp.mk)
+$(call inherit-product, device/google/gs201/device-common-aosp.mk)
+
+# Inherit some common PixelOS stuff.
+TARGET_DISABLE_EPPE := true
+$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 
 PRODUCT_NAME := aosp_lynx
 PRODUCT_DEVICE := lynx
-PRODUCT_MODEL := AOSP on Lynx
-PRODUCT_BRAND := Android
+PRODUCT_MODEL := Pixel 7a
+PRODUCT_BRAND := google
 PRODUCT_MANUFACTURER := Google
 
 DEVICE_MANIFEST_FILE := \
 	device/google/lynx/manifest.xml
+
+# Boot animation
+TARGET_SCREEN_HEIGHT := 2400
+TARGET_SCREEN_WIDTH := 1080
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    TARGET_PRODUCT=lynx \
+    PRIVATE_BUILD_DESC="lynx-user 14 UQ1A.231205.015 11084887 release-keys"
+
+BUILD_FINGERPRINT := google/lynx/lynx:14/UQ1A.231205.015/11084887:user/release-keys
